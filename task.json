@@ -1,0 +1,82 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "cd986cc1-1325-4f1a-879d-94d6b91f0c90",
+    "name": "Clair Tool Scanner for docker",
+    "friendlyName": "Clair Tool for scan the Docker image",
+    "description": "Clair Tool for scan the Docker image",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "sivaranjitha",
+    "version": {
+        "Major": 0,
+        "Minor": 0,
+        "Patch": 1
+    },
+    "instanceNameFormat": "Docker image details",
+    "inputs": [
+        {
+            "name": "Docker image Name",
+            "type": "string",
+            "label": "Docker image Name",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "docker image name"
+        },
+       {
+            "name": "Docker image Version",
+            "type": "string",
+            "label": "Docker image Version",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "docker image version"
+        },
+        {
+            "name": "ImageType",
+            "type": "pickList",
+            "label": "Image Type",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Type of the image",
+            "options":{
+	            "option1":"Public",
+	            "option2":"Private"
+        }
+        },
+
+       {
+            "name": "DockerHub Username",
+            "type": "string",
+            "label": "DockerHub Username",
+            "defaultValue": "",
+            "visibleRule":"ImageType = option2",
+            "required": true,
+            "helpMarkDown": "private registry username"
+        },
+       {
+            "name": "DockerHub Password",
+            "type": "password",
+            "label": "DockerHub Password",
+            "defaultValue": "",
+            "visibleRule":"ImageType = option2",
+            "required": true,
+            "helpMarkDown": "prvate registry password"
+        },
+        {
+            "name": "Private Registry Name",
+            "type": "string",
+            "label": "Private Registry Name",
+            "defaultValue": "",
+            "visibleRule":"ImageType = option2",
+            "required": true,
+            "helpMarkDown": "private container registry name"
+        }
+	 
+    
+    ],
+    "execution": {
+        "Node10": {
+            "target": "index.js"
+        }
+    }
+}
+
